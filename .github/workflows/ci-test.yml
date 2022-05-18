@@ -3,7 +3,11 @@ on: [push, pull_request]
 jobs:
   ci-test:
     runs-on: ubuntu-latest
-    container: ghcr.io/alessandrobiaggi/ci-test:latest
+    container:
+      image: ghcr.io/alessandrobiaggi/ci-test:latest
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.PRIVATE_ACCESS_TOKEN }}
     steps:
       - run: |
           echo "Hello, container!"
